@@ -29,4 +29,5 @@ USER root
 RUN chmod -R 755 /webapp/app
 USER appuser
 EXPOSE 8001
+
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--no-access-log", "--log-level", "info"]
