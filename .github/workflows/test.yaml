@@ -2,17 +2,14 @@ name: UV Coverage Report
 
 on:
   push:
-    branches: [test_ci]
 
   pull_request:
-    branches: [ test_ci ]
+    branches: [ main, release ]
 
 jobs:
   coverage:
-#    runs-on: self-hosted
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -34,31 +31,35 @@ jobs:
         run: uv run pytest tests
 
       - name: Run coverage
-        run: cd tests && uv run coverage run -m pytest . && uv run coverage report -m && uv run coverage html
-
-      - name: Extract total coverage
-        id: cov
         run: |
-          TOTAL_COVERAGE=$(uv run coverage xml -i coverage.xml --fail-under=0 | grep -Po 'line-rate="[^"]+"' | head -1 | cut -d'"' -f2)
-          # Convert line-rate (0.87) to %
-          TOTAL_PERCENT=$(echo "$TOTAL_COVERAGE * 100" | bc)
-          echo "coverage=${TOTAL_PERCENT%.*}%" >> $GITHUB_OUTPUT
-
-      - name: Comment coverage details
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: uv-coverage-report
-          message: |
-            🧪 **UV Coverage Report**
-            **Total coverage:** ${{ steps.cov.outputs.coverage }}
-
-            ---
-            ### 🔍 Files missing coverage (changed files only):
-            ```markdown
-            $(cat diff-report.md)
-            ```
-
-            📄 [View full HTML report](diff-cover.html)
-
-            ✅ Generated automatically via UV + Make cov
+          cd tests
+          uv run coverage run -m pytest .
+          uv run coverage report -m
+          uv run coverage html
+          uv run coverage xml
+          uv run coverage report -m > coverage.txt
+# TODO.
+#      - name: Extract total coverage
+#        id: cov
+#        run: |
+#          TOTAL_COVERAGE=$(awk -F'["]' '/line-rate/ {print $2; exit}' tests/coverage.xml)
+#          TOTAL_COVERAGE=${TOTAL_COVERAGE:-0}
+#          TOTAL_PERCENT=$(( $(echo "$TOTAL_COVERAGE * 100" | bc) ))
+#          echo "coverage=${TOTAL_PERCENT}%" >> $GITHUB_OUTPUT
+#      TODO
+#      - name: Comment coverage details
+#        uses: marocchino/sticky-pull-request-comment@v2
+#        with:
+#          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
+#          header: uv-coverage-report
+#          message: |
+#            🧪 **UV Coverage Report**
+#            **Total coverage:** ${{ steps.cov.outputs.coverage }}
+#
+#            ---
+#            ### 🔍 File coverage detail:
+#            ```text
+#            $(cat tests/coverage.txt)
+#            ```
+#
+#            ✅ Generated automatically via UV + Makefile cov
