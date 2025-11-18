@@ -38,4 +38,3 @@
 ## v1.0.0 (2025-11-18)
 
 - Initial Release
-test BREAKING CHANGE: update CHANGELOG.md
