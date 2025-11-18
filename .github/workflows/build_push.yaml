@@ -23,7 +23,7 @@ jobs:
         id: vars
         run: |
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           fi
 
       - name: Build & Push
