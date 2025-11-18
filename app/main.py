@@ -1,24 +1,17 @@
 import time
 
-from fastapi import Request
+from fastapi import FastAPI, Request
 from fastapi.openapi.utils import get_openapi
-from fastapi import FastAPI
-
 from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.middleware.gzip import GZipMiddleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from app.lifespans import lifespan
 from app.routers import app_routers
 from app.settings import settings
-from app.lifespans import lifespan
 
+app = FastAPI(title="Fake API Example", version="1.0", lifespan=lifespan, settings=settings)
 
-app = FastAPI(
-    title="Fake API Example",
-    version="1.0",
-    lifespan=lifespan,
-    settings = settings
-)
 
 def custom_openapi():
     if app.openapi_schema:
@@ -42,7 +35,9 @@ def custom_openapi():
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
+
 app.openapi = custom_openapi
+
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):

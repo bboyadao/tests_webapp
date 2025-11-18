@@ -1,8 +1,9 @@
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
-from app.database import Base, engine
 
+from fastapi import FastAPI
+
+from app.database import Base, engine
 
 logger = logging.getLogger(__name__)
 

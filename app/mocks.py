@@ -1,10 +1,12 @@
 import asyncio
 import os
 import random
+
 from faker import Faker
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from app.models import Base, Customer  # models.py từ project trước
+
+from app.models import Base, Customer
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -20,8 +22,9 @@ EXPLANATION_POOL = [
     "Positive social engagement (Twitter, Facebook)",
     "Frequent online shopping",
     "No late payments in last 12 months",
-    "High follower engagement on social media"
+    "High follower engagement on social media",
 ]
+
 
 async def create_mock_customers(total=100000, batch_size=1000):
     async with engine.begin() as conn:
@@ -38,12 +41,7 @@ async def create_mock_customers(total=100000, batch_size=1000):
                 email = fake.unique.email()
                 score = random.uniform(500, 850)
                 explanation = random.sample(EXPLANATION_POOL, 3)
-                customer = Customer(
-                    name=name,
-                    email=email,
-                    credit_score=score,
-                    explanation=explanation
-                )
+                customer = Customer(name=name, email=email, credit_score=score, explanation=explanation)
                 batch.append(customer)
 
             session.add_all(batch)
