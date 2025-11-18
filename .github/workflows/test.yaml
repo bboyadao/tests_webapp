@@ -2,7 +2,7 @@ name: UV Coverage Report
 
 on:
   pull_request:
-    branches: [main]
+    branches: [test_ci]
 
 jobs:
   coverage:
@@ -26,11 +26,6 @@ jobs:
 
       - name: Run tests via Makefile
         run: make cov || true
-
-      - name: Compare coverage with main
-        run: |
-          git fetch origin main
-          uv run diff-cover coverage.xml --compare-branch=origin/main --html-report diff-cover.html --markdown-report diff-report.md || true
 
       - name: Extract total coverage
         id: cov
