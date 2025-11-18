@@ -26,26 +26,7 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: Python Semantic Release
-#        uses: python-semantic-release/python-semantic-release@v10.5.2
-#        with:
-#          github_token: ${{ secrets.PR_TOKEN }}
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Python Semantic Release
+        uses: python-semantic-release/python-semantic-release@v10.5.2
         with:
-          node-version: 20
-
-      - name: Install Semantic Release
-        run: |
-          npm install -g semantic-release \
-            @semantic-release/changelog \
-            @semantic-release/git \
-            @semantic-release/github \
-            @semantic-release/commit-analyzer \
-            @semantic-release/release-notes-generator
-
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          semantic-release
+          github_token: ${{ secrets.PR_BOT_TOKEN }}
