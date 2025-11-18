@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/bboyadao/tests_webapp/compare/v1.2.0...v2.0.0) (2025-11-18)
+
+
+* chore!: drop a test ([ca6edbf](https://github.com/bboyadao/tests_webapp/commit/ca6edbfae7f5ebe1e3204f08dcea65ec2047b8a6))
+* Merge pull request [#8](https://github.com/bboyadao/tests_webapp/issues/8) from bboyadao/test_release ([931d9f7](https://github.com/bboyadao/tests_webapp/commit/931d9f71d40e437c590e541837e9a66f8b24d2df))
+
+
+### BREAKING CHANGES
+
+* to to know
+* update CHANGELOG.md
+
 # CHANGELOG
 - just add a a change !~
 
