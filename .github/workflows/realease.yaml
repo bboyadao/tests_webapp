@@ -39,3 +39,5 @@ jobs:
 
       - name: Python Semantic Release
         uses: python-semantic-release/python-semantic-release@v10.5.2
+        with:
+          github_token: ${{ secrets.PR_TOKEN }}
