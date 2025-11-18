@@ -30,3 +30,5 @@ jobs:
         uses: python-semantic-release/python-semantic-release@v10.5.2
         with:
           github_token: ${{ secrets.PR_BOT_TOKEN }}
+        run: |
+          semantic-release -vv --noop version --print
