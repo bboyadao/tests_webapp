@@ -26,17 +26,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Install deps
-        run: |
-          uv sync --locked --group ci
-
       - name: Python Semantic Release
         uses: python-semantic-release/python-semantic-release@v10.5.2
         with:
