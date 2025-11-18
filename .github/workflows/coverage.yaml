@@ -43,11 +43,8 @@ jobs:
 
       - name: Comment coverage details
         uses: marocchino/sticky-pull-request-comment@v2
-        permissions:
-          pull-requests: write
-          pull-requests-reason: to create or update PR comment
         with:
-          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
+          token: ${{ secrets.PR_BOT_TOKEN }}
           header: uv-coverage-report
           message: |
             🧪 **UV Coverage Report**
