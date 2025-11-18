@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/bboyadao/tests_webapp/compare/v1.0.0...v1.1.0) (2025-11-18)
+
+
+### Features
+
+* update docker file ([a12c8eb](https://github.com/bboyadao/tests_webapp/commit/a12c8ebb9e4eeedddf7f6b50556c790140daee63))
+
 # 1.0.0 (2025-11-18)
 
 
