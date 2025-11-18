@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/bboyadao/tests_webapp/compare/v2.0.0...v3.0.0) (2025-11-18)
+
+
+### Features
+
+* trigger build ([662cfc9](https://github.com/bboyadao/tests_webapp/commit/662cfc9954f49a6a3ddb69f79c1305c9f9a9fd6a))
+
+
+### BREAKING CHANGES
+
+* build and push to private
+
 # [2.0.0](https://github.com/bboyadao/tests_webapp/compare/v1.2.0...v2.0.0) (2025-11-18)
 
 
