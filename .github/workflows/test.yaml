@@ -1,7 +1,7 @@
 name: UV Coverage Report
 
 on:
-  pull_request:
+  push:
     branches: [test_ci]
 
 jobs:
