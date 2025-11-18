@@ -1,0 +1,58 @@
+name: UV Coverage Report
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies via UV
+        run: |
+          uv sync
+          uv sync --group tests
+
+      - name: Run tests via Makefile
+        run: make cov || true
+
+      - name: Compare coverage with main
+        run: |
+          git fetch origin main
+          uv run diff-cover coverage.xml --compare-branch=origin/main --html-report diff-cover.html --markdown-report diff-report.md || true
+
+      - name: Extract total coverage
+        id: cov
+        run: |
+          COVERAGE=$(grep -Eo "TOTAL\s+[0-9]+\s+[0-9]+\s+[0-9]+%" coverage.txt | awk '{print $4}')
+          echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+
+      - name: Comment coverage details
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          header: uv-coverage-report
+          message: |
+            🧪 **UV Coverage Report**
+            **Total coverage:** ${{ steps.cov.outputs.coverage }}
+
+            ---
+            ### 🔍 Files missing coverage (changed files only):
+            ```markdown
+            $(cat diff-report.md)
+            ```
+
+            📄 [View full HTML report](diff-cover.html)
+
+            ✅ Generated automatically via UV + Make cov

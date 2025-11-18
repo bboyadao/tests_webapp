@@ -1,0 +1,39 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+  autoupdate_branch: 'pre-commit'
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+  autoupdate_schedule: quarterly
+  skip: []
+  submodules: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.5.0'
+    hooks:
+      - id: trailing-whitespace
+      - id: check-json
+      - id: end-of-file-fixer
+        exclude: |
+          (?x)^(
+            \.idea\/.*|
+            \.vscode\/.*|
+          )$
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.1.11'
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+#  - repo: local
+#    hooks:
+#      - id: pre-commit-django-migrations
+#        name: Check django migrations
+#        entry: python manage.py makemigrations --check
+#        language: system
+#        types:
+#          - python
+#        pass_filenames: false
