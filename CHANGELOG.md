@@ -3,21 +3,13 @@
 
 ### Features
 
-* trigger build ([e53cbbe](https://github.com/bboyadao/tests_webapp/commit/e53cbbe1791f85dd6f9ca0116c736262f2a6dfe4))
 * trigger build and push ([4aaf9e6](https://github.com/bboyadao/tests_webapp/commit/4aaf9e61c6c0055423819945a9b6a7dd5f4be18f))
-* trigger build and push ([9a131eb](https://github.com/bboyadao/tests_webapp/commit/9a131eb250ddcfc00d6ca2aa3290f508d08e09eb))
-* trigger build and push ([e964233](https://github.com/bboyadao/tests_webapp/commit/e9642332e00438eaa60d6d24168620afff2e878c))
-* trigger build and push ([dabd802](https://github.com/bboyadao/tests_webapp/commit/dabd80251c43faece9e129431af3b68789966571))
-* trigger build and push ([5c69431](https://github.com/bboyadao/tests_webapp/commit/5c6943129df9e66f9918d9ae8c41d7e72093266c))
-
 
 ### BREAKING CHANGES
 
 * build and push to private registry
 * build and push to private
-
 # [3.0.0](https://github.com/bboyadao/tests_webapp/compare/v2.0.0...v3.0.0) (2025-11-18)
-
 
 ### Features
 
