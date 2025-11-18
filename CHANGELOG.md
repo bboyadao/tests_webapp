@@ -1,6 +1,38 @@
 # CHANGELOG
 <!-- version list -->
 
+## v1.2.0 (2025-11-18)
+
+### Chores
+
+- Refactor struct
+  ([`435e7e3`](https://github.com/bboyadao/tests_webapp/commit/435e7e30e5e0d7351e7960dda1edb684ff3b18bd))
+
+### Features
+
+- Refactor struct
+  ([`d83c443`](https://github.com/bboyadao/tests_webapp/commit/d83c44301e208bd5012ef13212a3d54fd44faa0f))
+
+- Refactor struct
+  ([`61ac3b8`](https://github.com/bboyadao/tests_webapp/commit/61ac3b8a7940308d7d9f8262545af9f3e76468f8))
+
+- Refactor struct
+  ([`f3dfa9c`](https://github.com/bboyadao/tests_webapp/commit/f3dfa9c25a4864768b21e4f06a361e814a1769b0))
+
+### Performance Improvements
+
+- Refactor struct
+  ([`1c007b7`](https://github.com/bboyadao/tests_webapp/commit/1c007b755bf319599efd55c04317386303e97677))
+
+
+## v1.1.0 (2025-11-18)
+
+### Features
+
+- Refactor struct
+  ([`d88a095`](https://github.com/bboyadao/tests_webapp/commit/d88a095e4ee9e2d6048f2406ee9915879a09d85b))
+
+
 ## v1.0.0 (2025-11-18)
 
 - Initial Release
