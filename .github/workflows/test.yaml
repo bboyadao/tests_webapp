@@ -31,10 +31,7 @@ jobs:
         run: uv run pytest tests
 
       - name: Run coverage
-        run: cd tests && coverage run -m pytest . && coverage report -m && coverage html
-
-      - name: Run tests via Makefile
-        run: make tests || true
+        run: cd tests && uv run coverage run -m pytest . && uv run coverage report -m && uv run coverage html
 
       - name: Extract total coverage
         id: cov
