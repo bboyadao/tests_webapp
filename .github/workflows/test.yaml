@@ -53,7 +53,7 @@ jobs:
       - name: Comment coverage details
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
           header: uv-coverage-report
           message: |
             🧪 **UV Coverage Report**
