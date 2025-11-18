@@ -14,10 +14,6 @@
 ### BREAKING CHANGES
 
 * build and push to private registry
-* build and push to private registry
-* build and push to private registry
-* build and push to private registry
-* build and push to private registry
 * build and push to private
 
 # [3.0.0](https://github.com/bboyadao/tests_webapp/compare/v2.0.0...v3.0.0) (2025-11-18)
