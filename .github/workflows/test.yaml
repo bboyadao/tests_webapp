@@ -1,13 +1,11 @@
-name: UV Coverage Report
+name: Run Tests
 
 on:
   push:
-
-  pull_request:
-    branches: [ main, release ]
+    branches: ["*"]
 
 jobs:
-  coverage:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,37 +27,3 @@ jobs:
 
       - name: Run Normal Test
         run: uv run pytest tests
-
-      - name: Run coverage
-        run: |
-          cd tests
-          uv run coverage run -m pytest .
-          uv run coverage report -m
-          uv run coverage html
-          uv run coverage xml
-          uv run coverage report -m > coverage.txt
-# TODO.
-#      - name: Extract total coverage
-#        id: cov
-#        run: |
-#          TOTAL_COVERAGE=$(awk -F'["]' '/line-rate/ {print $2; exit}' tests/coverage.xml)
-#          TOTAL_COVERAGE=${TOTAL_COVERAGE:-0}
-#          TOTAL_PERCENT=$(( $(echo "$TOTAL_COVERAGE * 100" | bc) ))
-#          echo "coverage=${TOTAL_PERCENT}%" >> $GITHUB_OUTPUT
-#      TODO
-#      - name: Comment coverage details
-#        uses: marocchino/sticky-pull-request-comment@v2
-#        with:
-#          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
-#          header: uv-coverage-report
-#          message: |
-#            🧪 **UV Coverage Report**
-#            **Total coverage:** ${{ steps.cov.outputs.coverage }}
-#
-#            ---
-#            ### 🔍 File coverage detail:
-#            ```text
-#            $(cat tests/coverage.txt)
-#            ```
-#
-#            ✅ Generated automatically via UV + Makefile cov

@@ -1,0 +1,51 @@
+name: Coverage Report
+
+on:
+  pull_request:
+    branches: [ main, release ]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install deps
+        run: |
+          uv lock && uv sync --locked --all-extras --dev && uv sync --group tests
+
+      - name: Run coverage
+        run: |
+          cd tests
+          uv run coverage run -m pytest .
+          uv run coverage report -m
+          uv run coverage html
+          uv run coverage xml
+          uv run coverage report -m > coverage.txt
+      - name: Comment coverage details
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
+          header: uv-coverage-report
+          message: |
+            🧪 **UV Coverage Report**
+            **Total coverage:** ${{ steps.cov.outputs.coverage }}
+
+            ---
+            ### 🔍 File coverage detail:
+            ```text
+            $(cat tests/coverage.txt)
+            ```
+
+            ✅ Generated automatically via UV + Makefile cov
