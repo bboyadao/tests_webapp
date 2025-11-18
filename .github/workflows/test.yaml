@@ -4,6 +4,9 @@ on:
   push:
     branches: [test_ci]
 
+  pull_request:
+    branches: [ test_ci ]
+
 jobs:
   coverage:
 #    runs-on: self-hosted
