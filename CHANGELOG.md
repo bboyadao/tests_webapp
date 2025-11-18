@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/bboyadao/tests_webapp/compare/v1.2.0...v1.3.0) (2025-11-18)
+
+
+### Features
+
+* update DOCKERHUB_USER ([4cbf873](https://github.com/bboyadao/tests_webapp/commit/4cbf87379d34b20a800cc390910d5651c3e32ba7))
+
 # [1.2.0](https://github.com/bboyadao/tests_webapp/compare/v1.1.0...v1.2.0) (2025-11-18)
 
 
