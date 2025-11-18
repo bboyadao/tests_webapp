@@ -33,8 +33,19 @@ jobs:
           uv run coverage html
           uv run coverage xml
           uv run coverage report -m > coverage.txt
+
+      - name: Read coverage file
+        id: read_cov
+        run: |
+          echo "content<<EOF" >> $GITHUB_OUTPUT
+          cat tests/coverage.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Comment coverage details
         uses: marocchino/sticky-pull-request-comment@v2
+        permissions:
+          pull-requests: write
+          pull-requests-reason: to create or update PR comment
         with:
           GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
           header: uv-coverage-report
@@ -45,7 +56,7 @@ jobs:
             ---
             ### 🔍 File coverage detail:
             ```text
-            $(cat tests/coverage.txt)
+            ${{ steps.read_cov.outputs.content }}
             ```
 
             ✅ Generated automatically via UV + Makefile cov
