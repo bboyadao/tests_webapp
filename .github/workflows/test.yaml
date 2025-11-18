@@ -23,22 +23,25 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v6
 
-      - name: Set up Python
+      - name: Install deps
         run: |
           uv sync
           uv sync --group tests
 
-      - name: Run tests
+      - name: Run coverage
         run: uv run pytest tests
+        run: cd tests && coverage run -m pytest . && coverage report -m && coverage html
 
       - name: Run tests via Makefile
-        run: make cov || true
+        run: make tests || true
 
       - name: Extract total coverage
         id: cov
         run: |
-          COVERAGE=$(grep -Eo "TOTAL\s+[0-9]+\s+[0-9]+\s+[0-9]+%" coverage.txt | awk '{print $4}')
-          echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+          TOTAL_COVERAGE=$(uv run coverage xml -i coverage.xml --fail-under=0 | grep -Po 'line-rate="[^"]+"' | head -1 | cut -d'"' -f2)
+          # Convert line-rate (0.87) to %
+          TOTAL_PERCENT=$(echo "$TOTAL_COVERAGE * 100" | bc)
+          echo "coverage=${TOTAL_PERCENT%.*}%" >> $GITHUB_OUTPUT
 
       - name: Comment coverage details
         uses: marocchino/sticky-pull-request-comment@v2
