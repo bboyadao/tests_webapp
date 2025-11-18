@@ -1,32 +1,43 @@
-name: Semantic Release
-
+name: Release
 on:
   push:
     branches:
       - release
 
+permissions:
+  contents: read
+
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
+    environment: tests
     permissions:
       contents: write
-      pull-requests: write
       issues: write
-      packages: write
-      deployments: write
-      statuses: write
-      checks: write
-      security-events: write
-      actions: write
+      pull-requests: write
       id-token: write
-      pages: write
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Python Semantic Release
-        uses: python-semantic-release/python-semantic-release@v10.5.2
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.PR_BOT_TOKEN }}
+          node-version: 20
+
+      - name: Install Semantic Release
+        run: |
+          npm install -g semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/github \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          semantic-release
