@@ -7,6 +7,8 @@ on:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,11 +50,9 @@ jobs:
           message: |
             🧪 **UV Coverage Report**
             **Total coverage:** ${{ steps.cov.outputs.coverage }}
-
             ---
             ### 🔍 File coverage detail:
             ```text
             ${{ steps.read_cov.outputs.content }}
             ```
-
             ✅ Generated automatically via UV + Makefile cov
