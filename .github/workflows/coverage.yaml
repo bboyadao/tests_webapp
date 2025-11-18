@@ -48,11 +48,10 @@ jobs:
         with:
           header: uv-coverage-report
           message: |
-            🧪 **UV Coverage Report**
+            **Coverage Report**
             **Total coverage:** ${{ steps.cov.outputs.coverage }}
             ---
-            ### 🔍 File coverage detail:
+            ### Files coverage detail:
             ```text
             ${{ steps.read_cov.outputs.content }}
             ```
-            ✅ Generated automatically via UV + Makefile cov
