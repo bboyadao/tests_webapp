@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
+      issues: write
+      packages: write
+      deployments: write
+      statuses: write
+      checks: write
+      security-events: write
+      actions: write
+      id-token: write
+      pages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +41,5 @@ jobs:
             @semantic-release/release-notes-generator
 
       - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
         run: |
           semantic-release
