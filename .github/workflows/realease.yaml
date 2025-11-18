@@ -8,21 +8,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    environment: test
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-      packages: write
-      deployments: write
-      statuses: write
-      checks: write
-      security-events: write
-      actions: write
-      id-token: write
-      pages: write
-      repository-projects: write
-
+    environment: tests
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,4 +17,4 @@ jobs:
       - name: Python Semantic Release
         uses: python-semantic-release/python-semantic-release@v10.5.2
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GH_CLASSIC_TOKEN }}
