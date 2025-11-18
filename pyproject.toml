@@ -85,7 +85,7 @@ tag_format = "v{version}"
 add_partial_tags = false
 
 [tool.semantic_release.branches.main]
-match = "(main|master|release)"
+match = "(release)"
 prerelease_token = "rc"
 prerelease = false
 
