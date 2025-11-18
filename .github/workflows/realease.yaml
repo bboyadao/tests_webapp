@@ -46,6 +46,6 @@ jobs:
 
       - name: Run Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.PR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PR_BOT_TOKEN }}
         run: |
           semantic-release
